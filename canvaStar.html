@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义播放器</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        body{
+            text-align: center;
+        }
+        #vas{
+            border: 1px solid deeppink;
+        }
+    </style>
+</head>
+<body>
+<canvas id="vas" width="400" height="400"></canvas>
+<script>
+    /*
+    * 技术要点：
+    * 1、掌握canvasRandingContext2D对象的API方法：
+    *   canvas元素为画布
+    *   canvas.getContext("2d")为canvasRandingContext2D对象；
+    *   beginPath()画笔开始工作，相当于我们手里的笔已经落到画布上；
+    *   接下来就是一些绘画工作和动作；
+    *   closePath() 表示画笔完成一次绘画 并且抬起画笔的动作；
+    * 2、掌握三角函数的运算方式及定理
+    *   弧度 = 角度*Math.PI/180;
+    *   x,y   Math.cos(旋转角度*Math.PI/180)  Math.sin(旋转角度*Math.PI/180)
+    * */
+    var vas = document.getElementById("vas");
+    var ctx = vas.getContext("2d");
+    var R = 100;
+    var r = 50;
+
+    ctx.beginPath();
+    ctx.translate(100, 100);
+    ctx.moveTo(R*Math.cos(18*Math.PI/180), -R*Math.sin(18*Math.PI/180));
+    for(var i=0; i<5; i++){
+        ctx.lineTo(R*Math.cos((18+72*i)*Math.PI/180), -R*Math.sin((18+72*i)*Math.PI/180));
+        ctx.lineTo(r*Math.cos((54+72*i)*Math.PI/180), -r*Math.sin((54+72*i)*Math.PI/180));
+    }
+    ctx.closePath();
+//    ctx.stroke();
+    ctx.fillStyle = "#ff0000";
+    ctx.fill();
+</script>
+</body>
+</html>
